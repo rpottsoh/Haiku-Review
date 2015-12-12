@@ -1,0 +1,63 @@
+object frmHaikuReviewMain: TfrmHaikuReviewMain
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMaximize]
+  Caption = 'Haiku Review'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  object label1: TLabel
+    AutoSize = True
+    Font.Family = 'Arial'
+    Font.Size = 12.000000000000000000
+    StyledSettings = [ssStyle, ssFontColor]
+    Height = 18.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 12.000000000000000000
+    Text = 'Haiku to Review:'
+    Width = 89.000000000000000000
+    WordWrap = False
+  end
+  object btnReviewHaiku: TButton
+    Height = 22.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 64.000000000000000000
+    TabOrder = 1
+    Text = 'Review Haiku'
+    Width = 80.000000000000000000
+    OnClick = btnReviewHaikuClick
+  end
+  object fldHaikuToReview: TEdit
+    Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 2
+    Font.Family = 'Arial'
+    Font.Size = 12.000000000000000000
+    Text = 'happy purple frog/eating bugs in the marshes/get indigestion'
+    Position.X = 8.000000000000000000
+    Position.Y = 32.000000000000000000
+    Width = 621.000000000000000000
+    Height = 22.000000000000000000
+    StyledSettings = [ssStyle, ssFontColor]
+    KillFocusByReturn = False
+  end
+  object moResults: TMemo
+    Touch.InteractiveGestures = [igPan, igLongTap, igDoubleTap]
+    Align = alBottom
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    Height = 384.000000000000000000
+    Position.Y = 96.000000000000000000
+    TabOrder = 3
+    Width = 640.000000000000000000
+    ReadOnly = True
+    WordWrap = True
+  end
+end
