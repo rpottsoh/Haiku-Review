@@ -3,3 +3,5 @@ __history
 debug
 *.dsk
 *.identcache
+*.~dsk
+*.local
