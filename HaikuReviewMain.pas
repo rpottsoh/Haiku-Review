@@ -8,7 +8,7 @@ uses
   FMX.Layouts, FMX.Memo, FMX.Edit, FMX.Types;
 
 const Vowels : TSysCharSet = ['a','e','i','o','u','y'];
-      CorrectSyllableCount : array[0..2] of integer = (5,7,5);
+      ExpectedSyllableCount : array[0..2] of integer = (5,7,5);
 
 type
   TfrmHaikuReviewMain = class(TForm)
@@ -23,11 +23,12 @@ type
     function isVowel(inChar : char):boolean;
     function NumberOfLines(inStr : string): integer;
     function getLines(inStr : string):TArray<String>;
-    function getWords(inStr : string):TArray<String>;
+    function TheWordsIn(line : string):TArray<String>;
     function CountSyllables(Words : TArray<String>): integer;
   public
     { Public declarations }
   end;
+
 
 var
   frmHaikuReviewMain: TfrmHaikuReviewMain;
@@ -45,19 +46,29 @@ function TfrmHaikuReviewMain.NumberOfLines(inStr : string): integer;
 var wrkStr : string;
 begin
   wrkStr := inStr.Trim;
-  result := ifthen(wrkstr.EndsWith('/'),wrkStr.CountChar('/'),wrkStr.CountChar('/') + 1);
+  wrkStr := ifthen(wrkstr.EndsWith('/'),wrkStr.PadRight(1,' '),wrkStr);
+  result := wrkStr.CountChar('/') + 1;
 end;
 
 function TfrmHaikuReviewMain.getLines(inStr : string):TArray<String>;
 begin
   result := instr.Split(['/'],3);
+  if length(result) < 3 then
+  begin
+     SetLength(result,3);
+     result[2] := '';
+  end;
 end;
 
-function TfrmHaikuReviewMain.getWords(inStr: string):TArray<String>;
+function TfrmHaikuReviewMain.TheWordsIn(line: string):TArray<String>;
 var NumWords : integer;
+    wrkStr : string;
 begin
-  NumWords := inStr.CountChar(' ') + 1;
-  result := instr.Split([' '],NumWords);
+  wrkStr := line.Trim;
+  if wrkStr.IsEmpty then
+    wrkStr := ' ';
+  NumWords := wrkStr.CountChar(' ') + 1;
+  result := wrkStr.Split([' '],NumWords);
 end;
 
 function TfrmHaikuReviewMain.CountSyllables(Words : TArray<String>): integer;
@@ -84,33 +95,35 @@ begin
 end;
 
 function TfrmHaikuReviewMain.ReviewHaiku(inStr : string): string;
-var Lines : TArray<string>;
-    line : string;
-    LineNum : integer;
-    Syllables : integer;
-    isProperHaiku : boolean;
+var isProperHaiku : boolean;
+
+    procedure CheckEachLine;
+    var Lines : TArray<string>;
+        line : string;
+        LineNum : integer;
+        Syllables : integer;
+    begin
+      isProperHaiku := true;
+      Lines := getLines(inStr.ToLower);
+      LineNum := 0;
+      for line in Lines do
+      begin
+        Syllables := CountSyllables(TheWordsIn(line));
+        isProperHaiku := isProperHaiku and (Syllables = ExpectedSyllableCount[LineNum]);
+        result := result + format('%d, ',[Syllables]);
+        inc(LineNum);
+      end;
+    end;
+
 begin
   result := inStr + ', ';
-  isProperHaiku := true;
-  fillchar(Syllables, sizeof(Syllables), #0);
   if NumberOfLines(inStr) = 3 then
   begin
-    Lines := getLines(inStr.ToLower);
-    LineNum := 0;
-    for line in Lines do
-    begin
-      Syllables := CountSyllables(getWords(line));
-      isProperHaiku := isProperHaiku and (Syllables = CorrectSyllableCount[LineNum]);
-      result := result + format('%d, ',[Syllables]);
-      inc(LineNum);
-    end;
-    //finalize(Lines);
+    CheckEachLine;
     result := result + ifthen(isProperHaiku,'Yes','No');
   end
   else
-  begin
-    result := result + 'No, incorrect line count'
-  end;
+    result := result + 'No, incorrect line count';
 end;
 
 procedure TfrmHaikuReviewMain.btnReviewHaikuClick(Sender: TObject);
