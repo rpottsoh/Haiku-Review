@@ -104,7 +104,7 @@ begin
       result := result + format('%d, ',[Syllables]);
       inc(LineNum);
     end;
-    finalize(Lines);
+    //finalize(Lines);
     result := result + ifthen(isProperHaiku,'Yes','No');
   end
   else
