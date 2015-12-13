@@ -82,7 +82,7 @@ begin
     CountThisVowel := true;
     for letter in word do
     begin
-      if CharInSet(letter,Vowels) then
+      if isVowel(letter) then
       begin
         if CountThisVowel then
           inc(result);
