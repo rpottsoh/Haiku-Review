@@ -23,7 +23,7 @@ object frmHaikuReviewMain: TfrmHaikuReviewMain
     Position.X = 8.000000000000000000
     Position.Y = 12.000000000000000000
     Text = 'Haiku to Review:'
-    Width = 89.000000000000000000
+    Width = 95.000000000000000000
     WordWrap = False
   end
   object btnReviewHaiku: TButton
@@ -40,12 +40,12 @@ object frmHaikuReviewMain: TfrmHaikuReviewMain
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 2
     Font.Family = 'Arial'
-    Font.Size = 12.000000000000000000
+    Font.Size = 20.000000000000000000
     Text = 'happy purple frog/eating bugs in the marshes/get indigestion'
     Position.X = 8.000000000000000000
-    Position.Y = 32.000000000000000000
+    Position.Y = 30.000000000000000000
     Width = 621.000000000000000000
-    Height = 22.000000000000000000
+    Height = 29.000000000000000000
     StyledSettings = [ssStyle, ssFontColor]
     KillFocusByReturn = False
   end
