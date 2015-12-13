@@ -1,3 +1,5 @@
 *.dcu
 __history
 debug
+*.dsk
+*.identcache
