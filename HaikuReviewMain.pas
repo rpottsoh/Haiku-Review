@@ -52,12 +52,9 @@ end;
 
 function TfrmHaikuReviewMain.getLines(inStr : string):TArray<String>;
 begin
-  result := instr.Split(['/'],3);
+  result := instr.Split(['/']);
   if length(result) < 3 then
-  begin
-     SetLength(result,3);
-     result[2] := '';
-  end;
+    SetLength(result,3);
 end;
 
 function TfrmHaikuReviewMain.TheWordsIn(line: string):TArray<String>;
