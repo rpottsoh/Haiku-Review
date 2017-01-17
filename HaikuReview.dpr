@@ -2,7 +2,8 @@ program HaikuReview;
 
 uses
   FMX.Forms,
-  HaikuReviewMain in 'HaikuReviewMain.pas' {frmHaikuReviewMain};
+  HaikuReviewMain in 'HaikuReviewMain.pas' {frmHaikuReviewMain},
+  uHaiku in 'uHaiku.pas';
 
 {$R *.res}
 
