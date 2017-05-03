@@ -5,3 +5,5 @@ debug
 *.identcache
 *.~dsk
 *.local
+
+*.res
