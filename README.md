@@ -31,5 +31,3 @@ For each Haiku, output a comma-separated single line that contains the number of
 
 `5,8,5,No`
 
-
-[Source: http://uva.onlinejudge.org/]
